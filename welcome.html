@@ -52,7 +52,7 @@
     <script>
         // URL se user ka name lene ka function
         const urlParams = new URLSearchParams(window.location.search);
-        const username = urlParams.get('name') || 'User';
+        const username = urlParams.get('user') || urlParams.get('name') || 'User';
 
         // Welcome text me show karo
         document.getElementById("welcomeText").innerText = `Welcome, ${username}`;
