@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Welcome</title>
+
     <style>
         body {
             margin: 0;
@@ -9,20 +10,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #000;
-            color: #0f0;
+            background: black;
+            color: #00ff00;
             font-family: monospace;
             overflow: hidden;
         }
 
+        /* Welcome Text */
         #welcomeText {
             font-size: 3rem;
             opacity: 0;
             animation: fadeIn 2s forwards, fadeOut 2s forwards 4s;
+            text-shadow: 0 0 10px #00ff00;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -31,35 +34,72 @@
             to { opacity: 0; }
         }
 
+        /* Main Content */
         #mainContent {
             display: none;
             color: white;
             text-align: center;
             font-size: 2rem;
+            animation: contentFade 2s forwards;
+        }
+
+        @keyframes contentFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .options {
+            margin-top: 20px;
+        }
+
+        .options a {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 25px;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .options a:hover {
+            background: #00ff00;
+            color: black;
         }
     </style>
 </head>
 
 <body>
 
+    <!-- Welcome Animation -->
     <div id="welcomeText"></div>
 
+    <!-- Main Website Content -->
     <div id="mainContent">
-        <h1>Main Content Loaded!</h1>
-        <p>Your hacker-style website content appears here.</p>
+        <h1>Cringe Coders</h1>
+        <p>Select Option</p>
+
+        <div class="options">
+            <a href="#">C Programming Syllabus</a>
+            <a href="#">Projects</a>
+            <a href="#">Notes</a>
+        </div>
     </div>
 
     <script>
-        // URL se user ka name lene ka function
-        const urlParams = new URLSearchParams(window.location.search);
-        const username = urlParams.get('user') || urlParams.get('name') || 'User';
+        // Username from URL
+        const params = new URLSearchParams(window.location.search);
+        const username = params.get("user") || params.get("name") || "User";
 
-        // Welcome text me show karo
-        document.getElementById("welcomeText").innerText = `Welcome, ${username}`;
+        // Show Welcome
+        const welcome = document.getElementById("welcomeText");
+        welcome.innerText = "Welcome " + username;
 
-        // 6 seconds baad content show karo
+        // After animation show content
         setTimeout(() => {
-            document.getElementById("welcomeText").style.display = "none";
+            welcome.style.display = "none";
             document.getElementById("mainContent").style.display = "block";
         }, 6000);
     </script>
